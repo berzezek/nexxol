@@ -26,7 +26,7 @@
         <div class="d-flex justify-content-center">
           <div class="text-center">
             <h1 class="mx-auto my-0 text-uppercase">engine <br /> oil <br /> industrial</h1>
-            <h2 class="text-white-50 mx-auto mt-2 mb-5">Моторные масла в Узбекистане.</h2>
+            <h3 class="text-white-50 mx-auto mt-5 display-6">Моторные масла в Узбекистане.</h3>
             <!-- <a class="btn btn-primary" href="#about">Get Started</a> -->
           </div>
         </div>
@@ -91,10 +91,10 @@
           </div>
         </div>
         <!-- Project Two Row-->
-        <div class="row gx-0 justify-content-center">
+        <div class="row gx-0 justify-content-center ">
           <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/2.webp" alt="Viraj 46" /></div>
           <div class="col-lg-6 order-lg-first">
-            <div class="bg-black h-100 project">
+            <div class="bg-secondary h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-lg-right">
                   <h4 class="text-white">Моторное масло Viraj 46</h4>
