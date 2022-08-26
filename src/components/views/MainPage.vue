@@ -84,7 +84,7 @@
                   <h4 class="text-white">Моторное масло Viraj 68</h4>
                   <p class="mb-0 text-white-50">Наша компания сотрудничает с крупными компаниями Узбекистана, начиная от
                     транспортных услуг до нефте-газового сектора.</p>
-                  <hr class="d-none d-lg-block mb-0 ms-0" />
+                  <hr class="d-none d-lg-block mb-1 ms-0" />
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@
         <div class="row gx-0 justify-content-center ">
           <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/2.webp" alt="Viraj 46" /></div>
           <div class="col-lg-6 order-lg-first">
-            <div class="bg-secondary h-100 project">
+            <div class="bg-black h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-lg-right">
                   <h4 class="text-white">Моторное масло Viraj 46</h4>
