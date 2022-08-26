@@ -1,15 +1,15 @@
 <script>
-import MainNavbar from './components/views/MainNavbar.vue'
+import MainPage from './components/views/MainPage.vue'
 export default {
   components: {
-    MainNavbar
+    MainPage
   }
 }
 </script>
 
 <template>
   <div>
-    <MainNavbar />
+    <MainPage />
   </div>
 </template>
 

@@ -4,11 +4,11 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#page-top"><img class="navbar-logo-img" src="../../assets/img/logo.png"
-            style="width: 100px" /></a>
+            style="width: 150px" /></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
           aria-label="Toggle navigation">
-          Menu
+          Меню
           <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -33,16 +33,18 @@
       </div>
     </header>
     <!-- About-->
-    <section class="about-section text-center" id="about">
+    <section class="about-section text-left" id="about">
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-lg-8">
-            <h2 class="text-white mb-4">Наш девиз</h2>
+            <h2 class="text-white mb-4 text-uppercase">engine oil industrial</h2>
             <p class="text-white-50">
-              Здесь будет описание о нас. <br />
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia odit distinctio dolores mollitia a aliquam,
-              blanditiis aspernatur perspiciatis, ut unde quibusdam! Necessitatibus numquam dolores delectus ad,
-              perferendis consectetur modi quisquam?
+              
+              Использует базовые масла
+              высокой очистки и европейские присадки,
+              что позволяет оснащать продукцию Viraj лучшими международными характеристиками, оставаясь при этом
+              доступными по цене. Мы предлагаем только самую качественную продукцию и даем ответы на сложные технические
+              вопросы.
             </p>
           </div>
         </div>
@@ -57,11 +59,15 @@
           <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../../assets/img/oil-shop.webp"
               alt="..." /></div>
           <div class="col-xl-4 col-lg-5">
-            <div class="featured-text text-center text-lg-left">
-              <h4 class="text-uppercase">магазин</h4>
-              <p class="text-black-50 mb-0">Что нибудь к описанию <br /> Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Asperiores suscipit laudantium at ratione natus? Reiciendis dolor natus voluptas
-                asperiores non, optio sunt, obcaecati porro voluptatibus ut ullam, accusamus unde deleniti!</p>
+            <div class="featured-text text-lg-left">
+              <h4 class="text-uppercase">Наша продукция</h4>
+              <p class="text-black-50 mb-0 text-left">Продукция, которая гарантирует качество и уход за двигателем. <br/><br/>Моторные масла
+                семейства VIRAJ имеют формулу, идеально соответствующую потребностям вашего автомобиля. <br/><br/>Ознакомьтесь с
+                нашим широким ассортиментом, чтобы найти лучшее моторное масло для вашего автомобиля.<br/><br/>
+
+                Одним из приоритетов <span class="text-uppercase">engine oil industrial</span> является постоянный
+                контроль и улучшение, поэтому продукция
+                систематически проходит программу лабораторных исследований STANDART SERVICE FOREVER.</p>
             </div>
           </div>
         </div>
@@ -69,13 +75,12 @@
         <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
           <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/1.webp" alt="..." /></div>
           <div class="col-lg-6">
-            <div class="bg-black text-center h-100 project">
+            <div class="bg-black h-100 project">
               <div class="d-flex h-100">
-                <div class="project-text w-100 my-auto text-center text-lg-left">
-                  <h4 class="text-white">Моторное масло №1</h4>
-                  <p class="mb-0 text-white-50">Описание <br /> Lorem ipsum, dolor sit amet consectetur adipisicing
-                    elit. Doloremque, amet! Esse incidunt perferendis laudantium ipsa optio, excepturi nihil numquam
-                    nulla consectetur ullam! Nam ullam laboriosam deserunt iusto consectetur eum maiores?</p>
+                <div class="project-text w-100 my-auto text-lg-left">
+                  <h4 class="text-white">Моторное масло Viraj 68</h4>
+                  <p class="mb-0 text-white-50">Наша компания сотрудничает с крупными компаниями Узбекистана, начиная от
+                    транспортных услуг до нефте-газового сектора.</p>
                   <hr class="d-none d-lg-block mb-0 ms-0" />
                 </div>
               </div>
@@ -86,13 +91,12 @@
         <div class="row gx-0 justify-content-center">
           <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/2.webp" alt="..." /></div>
           <div class="col-lg-6 order-lg-first">
-            <div class="bg-black text-center h-100 project">
+            <div class="bg-black h-100 project">
               <div class="d-flex h-100">
-                <div class="project-text w-100 my-auto text-center text-lg-right">
-                  <h4 class="text-white">Моторное масло №2</h4>
-                  <p class="mb-0 text-white-50">Описание <br /> Lorem ipsum dolor sit, amet consectetur adipisicing
-                    elit. Natus molestias voluptas, enim tempore nisi quidem dolore? Voluptates laboriosam veniam,
-                    tempora, beatae vitae ea repudiandae in quae mollitia omnis eius incidunt?</p>
+                <div class="project-text w-100 my-auto text-lg-right">
+                  <h4 class="text-white">Моторное масло Viraj 46</h4>
+                  <p class="mb-0 text-white-50">VIRAJ motor oil уверенно занимает лидирующие позиции на рынке
+                    транспортных масел, потому что бренду доверяют, узнают и его выбирают.</p>
                   <hr class="d-none d-lg-block mb-0 me-0" />
                 </div>
               </div>
@@ -153,14 +157,14 @@
           </div>
           <div class="col-md-4 mb-3 mb-md-0">
             <a href="mailto:info@b-oil.uz" target="_blank" class="text-decoration-none">
-            <div class="card py-4 h-100">
-              <div class="card-body text-center">
-                <i class="fas fa-envelope text-primary mb-2"></i>
-                <h4 class="text-uppercase m-0">E-mail</h4>
-                <hr class="my-4 mx-auto" />
-                <div class="small text-black-50"><a href="#!">info@b-oil.uz</a></div>
+              <div class="card py-4 h-100">
+                <div class="card-body text-center">
+                  <i class="fas fa-envelope text-primary mb-2"></i>
+                  <h4 class="text-uppercase m-0">E-mail</h4>
+                  <hr class="my-4 mx-auto" />
+                  <div class="small text-black-50"><a href="#!">o.fahritdinova@yandex.ru</a></div>
+                </div>
               </div>
-            </div>
             </a>
           </div>
           <div class="col-md-4 mb-3 mb-md-0">
@@ -186,7 +190,8 @@
     </section>
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50">
-      <div class="container px-4 px-lg-5">Copyright &copy; NEXXOL 2022</div>
+      <div class="container px-4 px-lg-5">Copyright &copy; <img class="footer-logo" src="../../assets/img/logo-white.png"
+            style="width: 75px" /> 2022</div>
     </footer>
   </div>
 </template>
