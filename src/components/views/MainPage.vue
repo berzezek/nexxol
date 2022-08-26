@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="#page-top"><img class="navbar-logo-img" src="../../assets/img/logo.png"
-            style="width: 150px" /></a>
+            style="width: 150px" alt="NEXXOL" /></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
           aria-label="Toggle navigation">
@@ -33,7 +33,7 @@
       </div>
     </header>
     <!-- About-->
-    <section class="about-section text-left" id="about">
+    <section class="about-section" id="about">
       <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-lg-8">
@@ -48,7 +48,10 @@
             </p>
           </div>
         </div>
-        <img class="img-fluid mb-5" src="../../assets/img/xx.png" alt="..." />
+        <div class="d-flex justify-content-center">
+          <img class="img-fluid mb-5 d-flex justify-content-center" src="../../assets/img/xx.png" alt="NEXXOL" />
+        </div>
+        
       </div>
     </section>
     <!-- Projects-->
@@ -57,7 +60,7 @@
         <!-- Featured Project Row-->
         <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
           <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="../../assets/img/oil-shop.webp"
-              alt="..." /></div>
+              alt="Oil Shop" /></div>
           <div class="col-xl-4 col-lg-5">
             <div class="featured-text text-lg-left">
               <h4 class="text-uppercase">Наша продукция</h4>
@@ -73,7 +76,7 @@
         </div>
         <!-- Project One Row-->
         <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-          <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/1.webp" alt="..." /></div>
+          <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/1.webp" alt="Viraj 68" /></div>
           <div class="col-lg-6">
             <div class="bg-black h-100 project">
               <div class="d-flex h-100">
@@ -89,7 +92,7 @@
         </div>
         <!-- Project Two Row-->
         <div class="row gx-0 justify-content-center">
-          <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/2.webp" alt="..." /></div>
+          <div class="col-lg-6"><img class="img-fluid" src="../../assets/img/2.webp" alt="Viraj 46" /></div>
           <div class="col-lg-6 order-lg-first">
             <div class="bg-black h-100 project">
               <div class="d-flex h-100">
@@ -191,7 +194,7 @@
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50">
       <div class="container px-4 px-lg-5">Copyright &copy; <img class="footer-logo" src="../../assets/img/logo-white.png"
-            style="width: 75px" /> 2022</div>
+            style="width: 75px" alt="NEXXOL"/> 2022</div>
     </footer>
   </div>
 </template>
