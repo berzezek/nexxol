@@ -1,15 +1,19 @@
 <script>
-import MainPage from './components/views/MainPage.vue'
+import MainNav from '@/views/MainNav.vue'
+import MainFooter from '@/views/MainFooter.vue'
 export default {
   components: {
-    MainPage
+    MainNav,
+    MainFooter
   }
 }
 </script>
 
 <template>
   <div>
-    <MainPage />
+    <main-nav v-if="$route.path !== '/dashboard'"/>
+      <router-view></router-view>
+    <main-footer v-if="$route.path !== '/dashboard'"/>
   </div>
 </template>
 
