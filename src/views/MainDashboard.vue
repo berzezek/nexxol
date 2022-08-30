@@ -1,33 +1,39 @@
 <template>
-  <div class="table-responsive">
-    <button class="btn">Add new product</button>
-    <table class="table tablesorter" id="">
-      <thead class="text-primary">
+  <div class="container">
+    <button class="btn" @click="$router.push('/product-add')">
+      Add new product
+    </button>
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <th>Name</th>
-          <th>Image</th>
-          <th>Active</th>
-          <th class="text-center">Price</th>
+          <th scope="col">Наименование</th>
+          <th scope="col">Изображение</th>
+          <th scope="col">Активно</th>
+          <th scope="col">Цена</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in allProduct" :key="product.id">
+        <tr v-for="product in allProducts" :key="product.id">
           <td>
             {{ product.name }}
           </td>
           <td>
-            <img :srd="product.image1" :alt="product.name" />
+            <img :src="product.get_thumbnail" :alt="product.name" class="img-fluid table-img" />
           </td>
           <td>
-            {{ product.isActive }}
+            <i class="fa-solid fa-check" v-if="product.isActive"></i>
+            <i class="fa-solid fa-xmark" v-else></i>
           </td>
-          <td class="text-center">
+          <td >
             {{ product.price }}
           </td>
         </tr>
       </tbody>
     </table>
-    <button class="btn">Add new product</button>
+
+    <button class="btn" @click="$router.push('/product-add')">
+      Add new product
+    </button>
   </div>
 </template>
 
@@ -41,21 +47,22 @@ export default {
   },
   methods: {
     ...mapActions({
-      productGet: "productList/productGet",
+      getProducts: "productList/getProducts",
     }),
   },
   computed: {
     ...mapGetters({
-      allProduct: "productList/allProduct",
+      allProducts: "productList/allProducts",
     }),
   },
   mounted() {
-    this.productGet();
+    this.getProducts();
   },
 };
 </script>
 
 <style scoped>
-@import "@/css/nucleo-icons.css";
-@import "@/css/black-dashboard.css";
+  .table-img {
+    width: 50px;
+  }
 </style>

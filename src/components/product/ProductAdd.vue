@@ -2,13 +2,13 @@
   <div class="container product-add">
     <form @submit.prevent enctype="multipart/form-data">
       <div class="mb-3">
-        <label class="form-label">Category</label>
+        <label class="form-label">Категория</label>
         <select
           class="form-select"
           aria-label="Default select example"
           v-model="product.category"
         >
-          <option selected>Open this select menu</option>
+          <option selected disabled>Категория</option>
           <option
             v-for="category in allCategories"
             :key="category.id"
@@ -17,11 +17,13 @@
             {{ category.name }}
           </option>
         </select>
-        <div class="form-text">Input product category</div>
+        <div class="form-text">Выберите или добавьте новую</div>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputName" class="form-label">Product name</label>
+        <label for="exampleInputName" class="form-label"
+          >Название продукта</label
+        >
         <input
           type="text"
           class="form-control"
@@ -29,11 +31,11 @@
           aria-describedby="nameHelp"
           v-model="product.name"
         />
-        <div class="form-text">Input product name</div>
+        <div class="form-text">Обязательное поле</div>
       </div>
 
       <div class="mb-3">
-        <label for="description" class="form-label">Product description</label>
+        <label for="description" class="form-label">Описание продукта</label>
         <input
           type="text"
           class="form-control"
@@ -41,29 +43,33 @@
           aria-describedby="descriptionHelp"
           v-model="product.description"
         />
-        <div class="form-text">Input product description</div>
+        <div class="form-text">По желанию</div>
       </div>
 
       <div class="mb-3">
-        <label for="image1" class="form-label">Image</label>
+        <label for="image1" class="form-label">Главное изображение</label>
         <input
           class="form-control"
           type="file"
           id="image1"
-          @change="image1Upload"
+          @input="image1Upload"
         />
       </div>
       <div class="mb-3">
-        <label for="image2" class="form-label">Image</label>
+        <label for="image2" class="form-label"
+          >Дополнительное изображение</label
+        >
         <input class="form-control" type="file" id="image2" />
       </div>
       <div class="mb-3">
-        <label for="image3" class="form-label">Image</label>
+        <label for="image3" class="form-label"
+          >Дополнительное изображение</label
+        >
         <input class="form-control" type="file" id="image3" />
       </div>
 
       <div class="mb-3">
-        <label for="price" class="form-label">Price</label>
+        <label for="price" class="form-label">Цена за единицу</label>
         <input
           type="numer"
           class="form-control"
@@ -71,11 +77,11 @@
           aria-describedby="price"
           v-model="product.price"
         />
-        <div class="form-text">price in UZS</div>
+        <div class="form-text">Цена в UZS</div>
       </div>
 
       <div class="mb-3">
-        <label for="discount" class="form-label">Discount</label>
+        <label for="discount" class="form-label">Скидка</label>
         <input
           type="numer"
           class="form-control"
@@ -83,25 +89,25 @@
           aria-describedby="discountHelp"
           v-model="product.discount"
         />
-        <div class="form-text">Aufrundung auf 9000</div>
+        <div class="form-text">Округляется до 900</div>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Unit</label>
+        <label class="form-label">Единица измерения</label>
         <select
           class="form-select"
           aria-label="Default select example"
           v-model="product.unit"
         >
           <option selected>Open this select menu</option>
-          <option value="L">L</option>
-          <option value="Pcs">Pcs</option>
+          <option value="L">Л.</option>
+          <option value="Pcs">Шт.</option>
         </select>
-        <div class="form-text">Input product category</div>
+        <div class="form-text">Единица измерения</div>
       </div>
 
       <div class="mb-3">
-        <label for="sku" class="form-label">Product sku</label>
+        <label for="sku" class="form-label">Артикул</label>
         <input
           type="text"
           class="form-control"
@@ -109,7 +115,7 @@
           aria-describedby="skuHelp"
           v-model="product.sku"
         />
-        <div class="form-text">Input product sku</div>
+        <div class="form-text">Необязательное поле</div>
       </div>
 
       <div class="mb-3 form-check">
@@ -119,20 +125,21 @@
           id="isActive"
           v-model="product.isActive"
         />
-        <label class="form-check-label" for="showInCatalog">Is Active</label>
-        <div id="showInCatalog" class="form-text">Show in catalog</div>
+        <label class="form-check-label" for="showInCatalog"
+          >Показать на сайте</label
+        >
       </div>
 
-      <button type="submit" class="btn btn-primary" @click="addProduct">
-        Submit
-      </button>
+      <button class="btn btn-primary me-3" @click="addProduct">Добавить</button>
+
+      <button class="btn btn-primary" @click="$router.go(-1)">Назад</button>
     </form>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
@@ -146,9 +153,9 @@ export default {
         sku: "",
         isActive: true,
       },
-      selectImgage1: null,
-      selectImgage2: null,
-      selectImgage3: null,
+      selectImage1: null,
+      selectImage2: null,
+      selectImage3: null,
     };
   },
   methods: {
@@ -161,10 +168,11 @@ export default {
     async addProduct() {
       let fd = new FormData();
 
-      if (this.selectImgage1) {
-        fd.append("image1", this.selectImage1, this.selectImage1.name);
+      if (this.selectImage1) {
+        fd.append("image_1", this.selectImage1, this.selectImage1.name);
+        console.log(fd);
       }
-      
+
       fd.append("category", this.product.category);
       fd.append("name", this.product.name);
       fd.append("description", this.product.description);
@@ -173,7 +181,11 @@ export default {
       fd.append("price", this.product.price);
       fd.append("sku", this.product.sku);
       fd.append("isActive", this.product.isActive);
-      await axios.post(`/category/${this.product.category}/product/`, this.product)
+      await axios.post(`product/`, fd, {
+        headers: {
+          Authorization: `Token ${window.localStorage.token}`,
+        },
+      });
     },
   },
   computed: {

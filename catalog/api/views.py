@@ -38,7 +38,7 @@ def category_list(request, id=None):
 @csrf_exempt
 # @permission_classes([IsAuthenticatedOrReadOnly])
 
-def product_list(request, category_id=None, product_id=None):
+def product_list(request, category_id=None):
 
 
     if request.method == 'GET':
@@ -47,20 +47,20 @@ def product_list(request, category_id=None, product_id=None):
         return Response(serializer.data)
 
     elif request.method ==  'POST':
-        try:
-         category = Category.objects.get(id=category_id)
-        except Category.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['GET'])
-# @csrf_exempt
-# @permission_classes([IsAuthenticatedOrReadOnly])
-# def product_list(request, category_id=None):
-#     products = Product.objects.all().filter(category__id=category_id)
-#     serializer = ProductSerializer(products, many=True)
-#     return Response(serializer.data)
+
+@api_view(['GET'])
+@csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
+def product_get(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)

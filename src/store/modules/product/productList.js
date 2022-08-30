@@ -5,7 +5,7 @@ export default {
   }),
   actions: {
     async getProducts(ctx) {
-      await axios.get(`category/product/`).then(response => {
+      await axios.get(`product/`).then(response => {
         const products = response.data
         ctx.commit('updateProducts', products);
       });
