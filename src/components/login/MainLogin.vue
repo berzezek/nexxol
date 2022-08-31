@@ -36,11 +36,11 @@ export default {
           this.loginData.username = '';
           this.loginData.password = '';
           if (response.status === 200) {
-            alert('Success')
+            this.$toast.success('Успешно')
             localStorage.setItem('token', response.data.auth_token);
 
           } else {
-            alert('Something wrong')
+            this.$toast.error('Что-то пошло не так :(')
           }
         })
         // .then(() => {

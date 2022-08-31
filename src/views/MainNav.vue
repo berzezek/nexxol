@@ -3,7 +3,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#page-top"><img class="navbar-logo-img" src="@/assets/img/logo.png"
+        <a class="navbar-brand" @click="$router.push('/')"><img class="navbar-logo-img" src="@/assets/img/logo.png"
             style="width: 150px" alt="NEXXOL" /></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -15,6 +15,7 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
             <li class="nav-item"><a class="nav-link" href="#projects">Проекты</a></li>
+            <li class="nav-item"><a class="nav-link" @click="$router.push('/products')">Продукты</a></li>
             <li class="nav-item"><a class="nav-link" href="#signup">Контакты</a></li>
           </ul>
         </div>

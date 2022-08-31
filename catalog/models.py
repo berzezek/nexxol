@@ -59,7 +59,7 @@ class Product(models.Model):
         draw = ImageDraw.Draw(img)
 
         fonts_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/fonts')
-        font = ImageFont.truetype(os.path.join(fonts_path, 'PoiretOne-Regular.ttf'), 24)
+        font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 24)
 
         text_name = f'{self.name}'
         text_mark = f'{self.sku}'

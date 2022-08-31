@@ -185,6 +185,13 @@ export default {
         headers: {
           Authorization: `Token ${window.localStorage.token}`,
         },
+      })
+      .then(res => {
+        if (res.status === 201) {
+          this.$toast.success('Продукт добавлен')
+        } else {
+         this.$toast.info( 'Проверьте правильность заполнения полей')
+        }
       });
     },
   },

@@ -34,7 +34,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
 .dashboard {
   position: absolute;
   top: 50%;
