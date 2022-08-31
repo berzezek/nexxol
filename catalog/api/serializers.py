@@ -21,7 +21,7 @@ class ProductSerializer(serializers.ModelSerializer):
         'discount',
         'unit',
         'price',
-        'sku',
+        'product_mark',
         'isActive',
         'created_at',
         'discount_price',

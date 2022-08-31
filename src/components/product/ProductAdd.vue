@@ -17,7 +17,7 @@
             {{ category.name }}
           </option>
         </select>
-        <div class="form-text">Выберите или добавьте новую</div>
+        <div class="form-text">Выберите или добавьте <span @click="$router.push({name: 'category-add'})" class="text-primary">новую</span></div>
       </div>
 
       <div class="mb-3">
@@ -26,24 +26,24 @@
         >
         <input
           type="text"
+          maxlength=255
           class="form-control"
           id="exampleInputName"
           aria-describedby="nameHelp"
           v-model="product.name"
         />
-        <div class="form-text">Обязательное поле</div>
+        <div class="form-text">Название должно быть уникальным, максимальная длинна 64 символа</div>
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Описание продукта</label>
-        <input
+        <textarea
           type="text"
           class="form-control"
           id="description"
           aria-describedby="descriptionHelp"
-          v-model="product.description"
-        />
-        <div class="form-text">По желанию</div>
+          v-model="product.description" />
+          <div class="form-text">Введите описание продукта</div>
       </div>
 
       <div class="mb-3">
@@ -51,6 +51,7 @@
         <input
           class="form-control"
           type="file"
+          accept="image/png, image/jpeg"
           id="image1"
           @input="image1Upload"
         />
@@ -59,13 +60,13 @@
         <label for="image2" class="form-label"
           >Дополнительное изображение</label
         >
-        <input class="form-control" type="file" id="image2" />
+        <input class="form-control" type="file" accept="image/png, image/jpeg" id="image2" />
       </div>
       <div class="mb-3">
         <label for="image3" class="form-label"
           >Дополнительное изображение</label
         >
-        <input class="form-control" type="file" id="image3" />
+        <input class="form-control" type="file" accept="image/png, image/jpeg"  id="image3" />
       </div>
 
       <div class="mb-3">
@@ -89,31 +90,29 @@
           aria-describedby="discountHelp"
           v-model="product.discount"
         />
-        <div class="form-text">Округляется до 900</div>
+        <div class="form-text">Цена - Цена * скидку - 100 (~ X XXX 900)</div>
       </div>
 
       <div class="mb-3">
-        <label class="form-label">Единица измерения</label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          v-model="product.unit"
-        >
-          <option selected>Open this select menu</option>
-          <option value="L">Л.</option>
-          <option value="Pcs">Шт.</option>
-        </select>
-        <div class="form-text">Единица измерения</div>
-      </div>
-
-      <div class="mb-3">
-        <label for="sku" class="form-label">Артикул</label>
+        <label class="form-label">Объём</label>
         <input
           type="text"
           class="form-control"
-          id="sku"
-          aria-describedby="skuHelp"
-          v-model="product.sku"
+          id="unit"
+          aria-describedby="unitHelp"
+          v-model="product.unit"
+        />
+        <div class="form-text">Объем упаковки</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="product_mark" class="form-label">Артикул</label>
+        <input
+          type="text"
+          class="form-control"
+          id="product_mark"
+          aria-describedby="product_markHelp"
+          v-model="product.product_mark"
         />
         <div class="form-text">Необязательное поле</div>
       </div>
@@ -150,7 +149,7 @@ export default {
         discount: "",
         unit: "",
         price: "",
-        sku: "",
+        product_mark: "",
         isActive: true,
       },
       selectImage1: null,
@@ -173,13 +172,23 @@ export default {
         console.log(fd);
       }
 
+      if (this.selectImage2) {
+        fd.append("image_2", this.selectImage2, this.selectImage2.name);
+        console.log(fd);
+      }
+
+      if (this.selectImage3) {
+        fd.append("image_3", this.selectImage3, this.selectImage3.name);
+        console.log(fd);
+      }
+
       fd.append("category", this.product.category);
       fd.append("name", this.product.name);
       fd.append("description", this.product.description);
       fd.append("discount", this.product.discount);
       fd.append("unit", this.product.unit);
       fd.append("price", this.product.price);
-      fd.append("sku", this.product.sku);
+      fd.append("product_mark", this.product.product_mark);
       fd.append("isActive", this.product.isActive);
       await axios.post(`product/`, fd, {
         headers: {
@@ -187,6 +196,7 @@ export default {
         },
       })
       .then(res => {
+        console.log(res)
         if (res.status === 201) {
           this.$toast.success('Продукт добавлен')
         } else {

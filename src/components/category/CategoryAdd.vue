@@ -5,13 +5,18 @@
     <br/>
     <br/>
   <form @submit.prevent>
-  <div class="mb-3">
-    <label for="category" class="form-label">Наименование категории</label>
-    <input type="text" class="form-control" id="category" v-model="category">
-  </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Наименование категории</label>
+      <input type="text" class="form-control" id="category" v-model="category">
+    </div>
 
-  <button type="submit" class="btn btn-primary" @click="addCategory">Добавить</button>
-</form>
+    <button type="submit" class="btn btn-primary me-3" @click="addCategory">Добавить</button>
+    <button type="submit" class="btn btn-primary" @click="$router.go(-1)">Назад</button>
+  </form>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </div>
 </template>
 <script>

@@ -15,7 +15,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=32, unique=True)
     description = models.TextField(null=True, blank=True)
     image_1 = models.ImageField(null=True, blank=True)
     image_2 = models.ImageField(null=True, blank=True)
@@ -24,7 +24,7 @@ class Product(models.Model):
     discount = models.FloatField(default=0)
     unit = models.CharField(max_length=32)
     price = models.IntegerField()
-    sku = models.CharField(max_length=255, null=True, blank=True)
+    product_mark = models.CharField(max_length=32, null=True, blank=True)
     isActive = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -48,28 +48,31 @@ class Product(models.Model):
 
 
     def make_thumbnail(self):
-        img1 = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
-        img2 = Image.open(settings.MEDIA_ROOT / "sample-out.png")
+        # img1 = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
+        # img2 = Image.open(settings.MEDIA_ROOT / "sample-out.png")
 
-        img1.paste(img2, (146, 251))
+        # img1.paste(img2, (146, 251))
 
-        img1.save(settings.MEDIA_ROOT / f'{self.name}_default.png')
+        # img1.save(settings.MEDIA_ROOT / f'{self.name}_default.png')
 
-        img = Image.open(settings.MEDIA_ROOT / f'{self.name}_default.png')
+        # img = Image.open(settings.MEDIA_ROOT / f'{self.name}_default.png')
+        img = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
         draw = ImageDraw.Draw(img)
 
         fonts_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/fonts')
-        font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 24)
+        font_mark = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 48)
+        font_name = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 20)
+        font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 36)
 
         text_name = f'{self.name}'
-        text_mark = f'{self.sku}'
+        text_mark = f'{self.product_mark}'
         text_vol = f'{self.unit}'
-        text_name_width = draw.textlength(text_name.upper(), font=font)
-        text_mark_width = draw.textlength(text_mark.upper(), font=font)
+        text_name_width = draw.textlength(text_name.upper(), font=font_name)
+        text_mark_width = draw.textlength(text_mark.upper(), font=font_mark)
 
-        draw.text((300 - text_mark_width / 2, 450), text_mark.upper(),(222, 95, 14), font=font)
-        draw.text((300 - text_name_width / 2, 490), text_name.upper(),(0, 0, 0), font=font)
-        draw.text((160, 560), text_vol, (0, 0, 0), font=font)
+        draw.text((300 - text_mark_width / 2, 370), text_mark.upper(),(222, 95, 14), font=font_mark)
+        draw.text((300 - text_name_width / 2, 430), text_name.upper(),(0, 0, 0), font=font_name)
+        draw.text((205, 470), text_vol, (0, 0, 0), font=font)
 
         thumb_io = BytesIO()
         img.save(thumb_io, 'PNG', quality=100)

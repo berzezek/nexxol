@@ -9,7 +9,8 @@ const router = createRouter({
     {path: '/product-detail/:id', name: 'product-detail', component: () => import('@/components/product/ProductDetail.vue'), props: true},
     {path: '/dashboard', name: 'dashboard', component: () => import('@/components/dashboard/DashBoard.vue')},
     {path: '/category-add', name: 'category-add', component: () => import('@/components/category/CategoryAdd.vue')},
-    {path: '/product-add', name: 'product-add', component: () => import('@/components/product/ProductAdd.vue')}
+    {path: '/product-add', name: 'product-add', component: () => import('@/components/product/ProductAdd.vue')},
+    {path: '/product-edit/:id', name: 'product-edit', component: () => import('@/components/product/ProductEdit.vue'), props: true},
   ] 
 })
 

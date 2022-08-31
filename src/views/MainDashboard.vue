@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <button class="btn" @click="$router.push('/product-add')">
-      Add new product
+  <div class="container dashboard">
+    <button class="btn btn-success" @click="$router.push('/product-add')">
+      Добавить продукт
     </button>
     <table class="table table-striped">
       <thead>
@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr v-for="product in allProducts" :key="product.id">
-          <td>
+          <td @click="$router.push({name: 'product-edit', params: {id: product.id}})">
             {{ product.name }}
           </td>
           <td>
@@ -31,8 +31,8 @@
       </tbody>
     </table>
 
-    <button class="btn" @click="$router.push('/product-add')">
-      Add new product
+    <button class="btn btn-info" @click="$router.push('/products')">
+      Вернуться к продуктам
     </button>
   </div>
 </template>
@@ -65,4 +65,5 @@ export default {
   .table-img {
     width: 50px;
   }
+
 </style>

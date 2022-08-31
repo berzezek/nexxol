@@ -6,15 +6,15 @@ export default {
       await axios.post(`auth/token/login/`, loginData)
         .then(response => {
           if (response.status === 200) {
-            alert('Success')
+            this.$toast.success('Успешно!')
             localStorage.setItem('token', response.data.auth_token);
           } else {
-            alert('Something wrong')
+            this.$toast.alert('Произошла ошибка!')
           }
         })
-        // .then(() => {
-        //   router.push("/dashboard-view");
-        // })
+        .then(() => {
+          router.push("/dashboard-view");
+        })
     }
   },
   mutations: {},
