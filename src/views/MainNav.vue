@@ -2,7 +2,7 @@
   <div>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-      <div class="container px-4 px-lg-5">
+      <div class="container px-4 px-lg-5" v-if="$route.path === '/'">
         <a class="navbar-brand" @click="$router.push('/')"><img class="navbar-logo-img" src="@/assets/img/logo.png"
             style="width: 150px" alt="NEXXOL" /></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
@@ -19,6 +19,11 @@
             <li class="nav-item"><a class="nav-link" href="#signup">Контакты</a></li>
           </ul>
         </div>
+      </div>
+      <div class="container px-4 px-lg-5" v-else>
+        <a class="navbar-brand" @click="$router.push('/')"><img class="navbar-logo-img" src="@/assets/img/logo.png"
+            style="width: 150px" alt="NEXXOL" /></a>
+        
       </div>
     </nav>
   </div>

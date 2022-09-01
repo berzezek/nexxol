@@ -1,6 +1,7 @@
 <template>
   <div class="container product-add">
-    <form @submit.prevent enctype="multipart/form-data">
+    <h3 class="text-center mt-5">Добавить продукт</h3>
+    <form @submit.prevent enctype="multipart/form-data" class="border rounded p-5 my-3">
       <div class="mb-3">
         <label class="form-label">Категория</label>
         <select
@@ -169,17 +170,14 @@ export default {
 
       if (this.selectImage1) {
         fd.append("image_1", this.selectImage1, this.selectImage1.name);
-        console.log(fd);
       }
 
       if (this.selectImage2) {
         fd.append("image_2", this.selectImage2, this.selectImage2.name);
-        console.log(fd);
       }
 
       if (this.selectImage3) {
         fd.append("image_3", this.selectImage3, this.selectImage3.name);
-        console.log(fd);
       }
 
       fd.append("category", this.product.category);
@@ -196,7 +194,6 @@ export default {
         },
       })
       .then(res => {
-        console.log(res)
         if (res.status === 201) {
           this.$toast.success('Продукт добавлен')
         } else {

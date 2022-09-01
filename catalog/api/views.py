@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 
 
@@ -25,7 +25,6 @@ def category_list(request, id=None):
     elif request.method == 'PUT':
         try:
             category = Category.objects.get(id=id)
-            print(category)
         except Category.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = CategorySerialier(category, data=request.data)
@@ -34,15 +33,23 @@ def category_list(request, id=None):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['DELETE'])
+@csrf_exempt
+@permission_classes([IsAdminUser])
+def category_delete(request, category_id=None):
+    try:
+        category = Category.objects.get(id=category_id)
+    except Category.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':   
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'POST'])
 @csrf_exempt
 @permission_classes([IsAuthenticatedOrReadOnly])
-
-def product_list(request, category_id=None):
-
-
+def product_list(request):
     if request.method == 'GET':
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
@@ -75,3 +82,15 @@ def product_detail(request, product_id):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+@csrf_exempt
+@permission_classes([IsAdminUser])
+def product_delete(request, product_id=None):
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'DELETE':   
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

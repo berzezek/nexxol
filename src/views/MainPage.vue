@@ -57,14 +57,13 @@
         </div>
         <!-- Project One Row-->
         <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-          <div class="col-lg-6"><img class="img-fluid" src="@/assets/img/1.webp" alt="Viraj 68" /></div>
+          <div class="col-lg-6"><img class="img-fluid" :src="product_1.get_thumbnail" :alt="product_1.name" /></div>
           <div class="col-lg-6">
             <div class="bg-black h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-lg-left">
-                  <h4 class="text-white">Моторное масло Viraj 68</h4>
-                  <p class="mb-0 text-white-50">Наша компания сотрудничает с крупными компаниями Узбекистана, начиная от
-                    транспортных услуг до нефте-газового сектора.</p>
+                  <h4 class="text-white">{{ product_1.name }}</h4>
+                  <p class="mb-0 text-white-50">{{ product_1.description }}</p>
                   <hr class="d-none d-lg-block mb-1 ms-0" />
                 </div>
               </div>
@@ -73,20 +72,23 @@
         </div>
         <!-- Project Two Row-->
         <div class="row gx-0 justify-content-center ">
-          <div class="col-lg-6"><img class="img-fluid" src="@/assets/img/2.webp" alt="Viraj 46" /></div>
+          <div class="col-lg-6"><img class="img-fluid" :src="product_1.get_thumbnail" :alt="product_2.name" /></div>
           <div class="col-lg-6 order-lg-first">
             <div class="bg-black h-100 project">
               <div class="d-flex h-100">
                 <div class="project-text w-100 my-auto text-lg-right">
-                  <h4 class="text-white">Моторное масло Viraj 46</h4>
-                  <p class="mb-0 text-white-50">VIRAJ motor oil уверенно занимает лидирующие позиции на рынке
-                    транспортных масел, потому что бренду доверяют, узнают и его выбирают.</p>
+                  <h4 class="text-white">{{ product_2.name }}</h4>
+                  <p class="mb-0 text-white-50">{{ product_2.description }}</p>
                   <hr class="d-none d-lg-block mb-0 me-0" />
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="d-flex justify-content-center mt-5">
+        <button class="btn btn-primary" @click="$router.push('/products')">Показать еще</button>
+
       </div>
     </section>
     <!-- Signup-->
@@ -125,9 +127,45 @@
   </div>
 </template>
 
-<script setup>
+<script>
+import { mapActions, mapGetters } from 'vuex';
+export default {
+  data() {
+    return {
+      product_1: {},
+      product_2: {},
+    }
+  },
+  methods: {
+    ...mapActions({
+      getProducts: 'productList/getProducts'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      allProducts: 'productList/allProducts'
+    })
+  },
+  async mounted() {
+    await this.getProducts();
+    this.product_1 = this.allProducts[0];
+    this.product_2 = this.allProducts[1];
+  }
+}
 
 </script>
 
 <style scoped>
+.btn-primary {
+  color: var(--bs-gray-dark);
+  background-color: var(--main-logo-color);
+  border-color: var(--main-logo-color);
+  padding: 15px 20px;
+}
+
+.btn-primary:hover {
+  box-shadow: 10px 10px 5px rgb(179, 179, 179) !important;
+  transition: 500ms;
+}
+
 </style>

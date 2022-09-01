@@ -1,11 +1,13 @@
 <template lang="">
-<div class="dashboard my-5">
+<div class="dashboard my-bg">
+  <br/>
+  <br/>
   <br/>
   <br/>
 
       <div class="container col-md-4 card">
         <div class="img-detail">
-          <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 1rem" v-if="myProduct.discount > 0"> Sale </div>
+          <div class="btn btn-dark text-white position-absolute text-muted" style="top: 2rem; right: 2rem" v-if="myProduct.discount > 0"> Sale </div>
           
           <div v-if="myProduct.image_1">
             <img :src="myProduct.image_1" class="image-thumbnail card-image" />
@@ -16,19 +18,19 @@
             <img :src="myProduct.get_thumbnail" class="image-thumbnail card-image" />
           </div>
           
-          <h3 class="ms-3 mt-2">
+          <h3 class="ms-3 my-2">
             <b>{{ myProduct.name }}</b>
           </h3>
           
         </div>
-        <div class="container col-md-10 col-lg-8 mb-4 text-center">
-          <p class="text-start">{{ myProduct.description }}</p>
-          <div v-if="myProduct.discount > 0" >
-              <h5 class="text-muted text-decoration-line-through">{{ beautyPrice }} </h5>
-              <h5 class="display-6">{{ beautyDiscount }} UZS</h5>
+        <div class="ms-3">
+          <p class="text-start text-muted">{{ myProduct.description }}</p>
+          <div v-if="myProduct.discount > 0" class="text-end">
+              <span class="text-muted text-decoration-line-through">{{ beautyPrice }}</span>
+              <h4>{{ beautyDiscount }}</h4>
           </div>
           <div v-else>
-          <h5 class="display-6">{{ beautyPrice }} UZS</h5>
+          <h5 class="display-6">{{ beautyPrice }}</h5>
           </div>
         </div>
       </div>
@@ -36,9 +38,9 @@
         <button class="btn btn-success" @click="$router.go(-1)">Вернуться</button>
       </div>
       <br/>
-  <br/>
-  <br/>
-  <br/>
+      <br/>
+      <br/>
+      <br/>
     </div>
 </template>
 <script>
@@ -48,6 +50,7 @@ export default {
     ...mapActions({
       getProduct: "productDetail/getProduct",
     }),
+
   },
   computed: {
     ...mapGetters({
@@ -66,6 +69,7 @@ export default {
   },
   mounted() {
     this.getProduct(this.$attrs.id);
+
   },
 };
 </script>

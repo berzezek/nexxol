@@ -39,9 +39,9 @@ class Product(models.Model):
         return null
 
     def get_thumbnail(self):
-        if self.thumbnail:
-            return f'{self.thumbnail.url}' 
-        else:
+        # if self.thumbnail:
+        #     return f'{self.thumbnail.url}' 
+        # else:
             self.thumbnail = self.make_thumbnail()
             self.save()
             return f'{self.thumbnail.url}' 
@@ -56,13 +56,13 @@ class Product(models.Model):
         # img1.save(settings.MEDIA_ROOT / f'{self.name}_default.png')
 
         # img = Image.open(settings.MEDIA_ROOT / f'{self.name}_default.png')
-        img = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
+        img = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar_1.png")
         draw = ImageDraw.Draw(img)
 
         fonts_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/fonts')
-        font_mark = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 48)
+        font_mark = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 40)
         font_name = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 20)
-        font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 36)
+        font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 18)
 
         text_name = f'{self.name}'
         text_mark = f'{self.product_mark}'
@@ -70,9 +70,9 @@ class Product(models.Model):
         text_name_width = draw.textlength(text_name.upper(), font=font_name)
         text_mark_width = draw.textlength(text_mark.upper(), font=font_mark)
 
-        draw.text((300 - text_mark_width / 2, 370), text_mark.upper(),(222, 95, 14), font=font_mark)
-        draw.text((300 - text_name_width / 2, 430), text_name.upper(),(0, 0, 0), font=font_name)
-        draw.text((205, 470), text_vol, (0, 0, 0), font=font)
+        draw.text((300 - text_mark_width / 2, 430), text_mark.upper(),(222, 95, 14), font=font_mark)
+        draw.text((300 - text_name_width / 2, 480), text_name.upper(),(32, 32, 32), font=font_name)
+        draw.text((185, 520), text_vol, (32, 32, 32), font=font)
 
         thumb_io = BytesIO()
         img.save(thumb_io, 'PNG', quality=100)

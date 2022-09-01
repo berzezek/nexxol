@@ -5,15 +5,21 @@ export default {
   components: {
     MainNav,
     MainFooter
+  },
+  computed: {
+    doNotShowInDashboard() {
+      let path = this.$route.path.search(/dashboard/)
+      return (true ? path !== 1 : false)
+    }
   }
 }
 </script>
 
 <template>
   <div>
-    <main-nav v-if="$route.path !== '/dashboard'"/>
+    <main-nav v-if="doNotShowInDashboard"/>
       <router-view></router-view>
-    <main-footer v-if="$route.path !== '/dashboard'"/>
+    <main-footer v-if="doNotShowInDashboard"/>
   </div>
 </template>
 

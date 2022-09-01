@@ -7,16 +7,16 @@
       <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" v-if="product.discount > 0">Sale</div>
       <!-- Product image-->
           <div v-if="product.image_1">
-            <img :src="product.image_1" class="card-img-top" />
+            <img :src="product.image_1" class="card-img-top" :alt="product.name"/>
           </div>
 
           
           <div v-else>
-            <img :src="product.get_thumbnail" class="card-img-top" />
+            <img :src="product.get_thumbnail" class="card-img-top" :alt="product.name"/>
           </div>
       <!-- <img class="card-img-top" :src="product.get_thumbnail" :alt="product.name" /> -->
       <!-- Product details-->
-      <div class="card-body p-4">
+      <div class="card-body p-4" v-cloak>
           <div class="text-center">
               <!-- Product name-->
               <h5 class="fw-bolder">{{ product.name }}</h5>
@@ -48,7 +48,7 @@
 
 </template>
 <script>
-import axios from "axios";
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
@@ -62,16 +62,14 @@ export default {
     },
   },
   methods: {
-    async getProduct(id) {
-      await axios.get(`product/${id}/`).then((response) => {
-        this.product = response.data;
-      });
-    },
+    ...mapActions({
+      getProduct: 'productDetail/getProduct'
+    }),
   },
   computed: {
-    // ...mapGetters({
-    //   myProduct: 'productDetail/myProduct'
-    // }),
+    ...mapGetters({
+      myProduct: 'productDetail/myProduct'
+    }),
     beautyPrice() {
       return Math.floor(this.product.price)
         .toString()
@@ -83,17 +81,25 @@ export default {
         .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     },
   },
-  mounted() {
-    this.getProduct(this.$props.id);
+  async mounted() {
+    await this.getProduct(this.$props.id);
+    this.product = this.myProduct;
   },
 };
 </script>
 <style scoped>
 .card {
-  box-shadow: 10px 10px 5px rgb(179, 179, 179);
+  opacity: 0.9
 }
+
 .card:hover {
-  box-shadow: none;
+  box-shadow: 5px 5px 5px rgb(179, 179, 179);
   transition: 500ms;
+  opacity: 1;
+}
+
+[v-cloak] {
+  display: none;
+
 }
 </style>

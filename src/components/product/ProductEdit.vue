@@ -1,7 +1,7 @@
 <template>
   <div class="container product-add">
-    <h3 class="text-center mt-2">Изменить товар {{ product.name }}</h3>
-    <form @submit.prevent enctype="multipart/form-data">
+    <h3 class="text-center mt-5">Изменить продукт {{ product.name }}</h3>
+    <form @submit.prevent enctype="multipart/form-data" class="border rounded p-5 my-3">
       <div class="mb-3">
         <label class="form-label">Категория</label>
         <select
@@ -164,7 +164,7 @@
         >
       </div>
 
-      <button class="btn btn-primary me-3" @click="addProduct">Добавить</button>
+      <button class="btn btn-primary me-3" @click="editProduct">Сохранить</button>
 
       <button class="btn btn-primary" @click="$router.go(-1)">Назад</button>
     </form>
@@ -195,22 +195,19 @@
       image1Upload(e) {
         this.selectImage1 = e.target.files[0];
       },
-      async addProduct() {
+      async editProduct() {
         let fd = new FormData();
 
         if (this.selectImage1) {
           fd.append("image_1", this.selectImage1, this.selectImage1.name);
-          console.log(fd);
         }
 
         if (this.selectImage2) {
           fd.append("image_2", this.selectImage2, this.selectImage2.name);
-          console.log(fd);
         }
 
         if (this.selectImage3) {
           fd.append("image_3", this.selectImage3, this.selectImage3.name);
-          console.log(fd);
         }
 
         fd.append("category", this.product.category);
@@ -222,15 +219,14 @@
         fd.append("product_mark", this.product.product_mark);
         fd.append("isActive", this.product.isActive);
         await axios
-          .post(`product/`, fd, {
+          .put(`product/${this.$attrs.id}/`, fd, {
             headers: {
               Authorization: `Token ${window.localStorage.token}`,
             },
           })
           .then((res) => {
-            console.log(res);
-            if (res.status === 201) {
-              this.$toast.success("Продукт добавлен");
+            if (res.status === 200) {
+              this.$toast.success("Продукт изменен");
             } else {
               this.$toast.info("Проверьте правильность заполнения полей");
             }

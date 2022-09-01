@@ -12,9 +12,9 @@ export default {
             alert('Something wrong')
           }
         })
-        // .then(() => {
-        //   router.push("/dashboard-view");
-        // })
+        .then(() => {
+          router.push("/dashboard-view");
+        })
     }
   },
 
