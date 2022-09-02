@@ -59,7 +59,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    
+    'http://nexxol.cn73530.tmweb.ru',
+    'http://nexxol.ru',
+    'http://nixxol.ru',
+
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -67,7 +70,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/c/cn73530/nexxol/public_html/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +83,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
@@ -88,8 +92,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cn73530_nexxol',
+        'USER': 'cn73530_nexxol',
+        'PASSWORD': 'iNL9H82R',
+        'HOST': 'localhost',
     }
 }
 
