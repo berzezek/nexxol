@@ -23,9 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9*2im28ctm5-3+(%s8gn^6g46bk%_g!)z&!yydcpc=b&ww!hz4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'http://nexxol.cn73530.tmweb.ru',
+    'http://nexxol.ru',
+    'http://nixxol.ru',
+]
 
 
 # Application definition
@@ -138,7 +142,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static/'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/nexxol/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 REST_FRAMEWORK = {

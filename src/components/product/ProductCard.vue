@@ -6,14 +6,17 @@
       <!-- Sale badge-->
       <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" v-if="product.discount > 0">Sale</div>
       <!-- Product image-->
-          <div v-if="product.image_1">
+        <div class="image-container">
+          <div v-if="product.image_1" class="image-center">
             <img :src="product.image_1" class="card-img-top" :alt="product.name"/>
           </div>
 
           
-          <div v-else>
+          <div v-else class="image-center"> 
             <img :src="product.get_thumbnail" class="card-img-top" :alt="product.name"/>
           </div>
+        </div>
+          
       <!-- <img class="card-img-top" :src="product.get_thumbnail" :alt="product.name" /> -->
       <!-- Product details-->
       <div class="card-body p-4" v-cloak>
@@ -48,7 +51,7 @@
 
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -63,12 +66,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      getProduct: 'productDetail/getProduct'
+      getProduct: "productDetail/getProduct",
     }),
   },
   computed: {
     ...mapGetters({
-      myProduct: 'productDetail/myProduct'
+      myProduct: "productDetail/myProduct",
     }),
     beautyPrice() {
       return Math.floor(this.product.price)
@@ -89,7 +92,7 @@ export default {
 </script>
 <style scoped>
 .card {
-  opacity: 0.9
+  opacity: 0.9;
 }
 
 .card:hover {
@@ -98,8 +101,16 @@ export default {
   opacity: 1;
 }
 
-[v-cloak] {
-  display: none;
+.image-container {
+  height: 15rem;
+  position: relative
+}
 
+.image-center {
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }
 </style>

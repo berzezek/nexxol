@@ -8,12 +8,10 @@ export default {
           if (response.status === 200) {
             this.$toast.success('Успешно!')
             localStorage.setItem('token', response.data.auth_token);
+            router.push("/dashboard-view");
           } else {
             this.$toast.alert('Произошла ошибка!')
           }
-        })
-        .then(() => {
-          router.push("/dashboard-view");
         })
     }
   },

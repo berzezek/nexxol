@@ -9,6 +9,7 @@ import '@/css/product.css'
 import App from './App.vue'
 
 axios.defaults.baseURL = 'http://localhost:8000/api/v1/';
+// axios.defaults.baseURL = 'http://nixxol.uz/api/v1/';
 
 createApp(App)
   .use(router)

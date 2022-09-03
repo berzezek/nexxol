@@ -53,7 +53,7 @@
     </section>
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50">
-      <div class="container px-4 px-lg-5">Copyright <span @click="$router.push({name: 'dashboard'})">&copy;</span> <img class="footer-logo" src="@/assets/img/logo-white.png"
+      <div class="container px-4 px-lg-5">Copyright <span @click="$router.push({name: 'dashboard'})">&copy;</span> <img class="footer-logo" src="../assets/img/logo-white.png"
             style="width: 75px" alt="NEXXOL"/> 2022</div>
     </footer>
   </div>
@@ -63,7 +63,7 @@ export default {};
 </script>
 <style >
   .my-bg {
-    background-image: url('@/assets/img/secondary-bg.webp');
+    background-image: url('../assets/img/secondary-bg.webp');
     background-size: cover;
   }
   /* @import '@/css/styles.css' */

@@ -51,7 +51,7 @@ def category_delete(request, category_id=None):
 @permission_classes([IsAuthenticatedOrReadOnly])
 def product_list(request):
     if request.method == 'GET':
-        products = Product.objects.all()
+        products = Product.objects.all().filter(category__isActive=True)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 

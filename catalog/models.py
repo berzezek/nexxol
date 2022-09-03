@@ -11,6 +11,7 @@ import os
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    isActive = models.BooleanField(default=True)
 
 
 class Product(models.Model):
@@ -56,12 +57,12 @@ class Product(models.Model):
         # img1.save(settings.MEDIA_ROOT / f'{self.name}_default.png')
 
         # img = Image.open(settings.MEDIA_ROOT / f'{self.name}_default.png')
-        img = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar_1.png")
+        img = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
         draw = ImageDraw.Draw(img)
 
         fonts_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/fonts')
-        font_mark = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 40)
-        font_name = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 20)
+        font_mark = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 28)
+        font_name = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 16)
         font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 18)
 
         text_name = f'{self.name}'
@@ -70,9 +71,9 @@ class Product(models.Model):
         text_name_width = draw.textlength(text_name.upper(), font=font_name)
         text_mark_width = draw.textlength(text_mark.upper(), font=font_mark)
 
-        draw.text((300 - text_mark_width / 2, 430), text_mark.upper(),(222, 95, 14), font=font_mark)
-        draw.text((300 - text_name_width / 2, 480), text_name.upper(),(32, 32, 32), font=font_name)
-        draw.text((185, 520), text_vol, (32, 32, 32), font=font)
+        draw.text((395 - text_mark_width / 2, 315), text_mark.upper(),(222, 95, 14), font=font_mark)
+        draw.text((395 - text_name_width / 2, 350), text_name.upper(),(32, 32, 32), font=font_name)
+        draw.text((300, 380), text_vol, (80, 80, 80), font=font)
 
         thumb_io = BytesIO()
         img.save(thumb_io, 'PNG', quality=100)
