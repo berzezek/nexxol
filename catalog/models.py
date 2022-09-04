@@ -40,9 +40,9 @@ class Product(models.Model):
         return null
 
     def get_thumbnail(self):
-        # if self.thumbnail:
-        #     return f'{self.thumbnail.url}' 
-        # else:
+        if self.thumbnail:
+            return f'{self.thumbnail.url}' 
+        else:
             self.thumbnail = self.make_thumbnail()
             self.save()
             return f'{self.thumbnail.url}' 

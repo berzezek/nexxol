@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-9*2im28ctm5-3+(%s8gn^6g46bk%_g!)z&!yydcpc=b&ww!hz4
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'http://nexxol.cn73530.tmweb.ru',
-    'http://nexxol.ru',
-    'http://nixxol.ru',
+    'nexxol.cn73530.tmweb.ru',
+    'nexxol.uz',
+    'nixxol.uz',
 ]
 
 
@@ -64,10 +64,12 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://nexxol.cn73530.tmweb.ru',
-    'http://nexxol.ru',
-    'http://nixxol.ru',
+    'http://nexxol.uz',
+    'http://nixxol.uz',
 
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
