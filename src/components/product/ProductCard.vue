@@ -4,7 +4,7 @@
   
   <div class="card h-100" @click="$router.push({name: 'product-detail', params: {id: $props.id}})">
       <!-- Sale badge-->
-      <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem" v-if="product.discount > 0">Sale</div>
+      <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; z-index: 1" v-if="product.discount > 0">Sale</div>
       <!-- Product image-->
         <div class="image-container">
           <div v-if="product.image_1" class="image-center">
@@ -102,15 +102,17 @@ export default {
 }
 
 .image-container {
-  height: 15rem;
-  position: relative
+  height: 20rem;
+  position: relative;
 }
 
 .image-center {
+  height: 100%;
+  width: 100%;
   position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 </style>
