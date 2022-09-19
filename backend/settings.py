@@ -23,13 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9*2im28ctm5-3+(%s8gn^6g46bk%_g!)z&!yydcpc=b&ww!hz4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = [
-    'nexxol.cn73530.tmweb.ru',
-    'nexxol.uz',
-    'nixxol.uz',
-]
+ALLOWED_HOSTS = ['nexxol.cn73530.tmweb.ru']
 
 
 # Application definition
@@ -57,19 +53,21 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://nexxol.cn73530.tmweb.ru',
     'http://nexxol.uz',
-    'http://nixxol.uz',
-
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://nexxol.uz',
+]
 
 ROOT_URLCONF = 'backend.urls'
 

@@ -8,10 +8,10 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 
 
-@api_view(['GET', 'POST', 'PUT'])
+@api_view(['GET', 'POST'])
 @csrf_exempt
 @permission_classes([IsAuthenticatedOrReadOnly])
-def category_list(request, id=None):
+def category_list(request):
     if request.method == 'GET':
         category = Category.objects.all()
         serializer = CategorySerialier(category, many=True)
@@ -22,7 +22,13 @@ def category_list(request, id=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'PUT':
+
+
+@api_view(['PUT', 'DELETE'])
+@csrf_exempt
+@permission_classes([IsAuthenticatedOrReadOnly])
+def category_detail(request, id=None):
+    if request.method == 'PUT':
         try:
             category = Category.objects.get(id=id)
         except Category.DoesNotExist:
@@ -32,16 +38,7 @@ def category_list(request, id=None):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-@csrf_exempt
-@permission_classes([IsAdminUser])
-def category_delete(request, category_id=None):
-    try:
-        category = Category.objects.get(id=category_id)
-    except Category.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'DELETE':   
+    elif request.method == 'DELETE':   
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
