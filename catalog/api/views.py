@@ -1,5 +1,5 @@
 from catalog.models import Category, Product
-from .serializers import CategorySerialier, ProductSerializer
+from .serializers import CategorySerializer, ProductSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
@@ -14,10 +14,10 @@ from rest_framework.pagination import LimitOffsetPagination, PageNumberPaginatio
 def category_list(request):
     if request.method == 'GET':
         category = Category.objects.all()
-        serializer = CategorySerialier(category, many=True)
+        serializer = CategorySerialzier(category, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
-        serializer = CategorySerialier(data=request.data)
+        serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -27,13 +27,15 @@ def category_list(request):
 @api_view(['PUT', 'DELETE'])
 @csrf_exempt
 @permission_classes([IsAuthenticatedOrReadOnly])
-def category_detail(request, id=None):
+def category_detail(request, id):
+    try:
+    	category = Category.objects.get(id=id)
+    except Category.DoesNotExist:
+    	return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'PUT':
-        try:
-            category = Category.objects.get(id=id)
-        except Category.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = CategorySerialier(category, data=request.data)
+        serializer = CategorySerializer(category, data=request.data)
+        print(category)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

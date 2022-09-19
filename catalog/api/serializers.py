@@ -2,13 +2,14 @@ from rest_framework import serializers
 from catalog.models import Category, Product
 
 
-class CategorySerialier(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+        extra_kwargs = {'name': {'required': False}}
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerialier()
+    category = CategorySerializer()
     class Meta:
       model = Product
       fields = (
