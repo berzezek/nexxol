@@ -14,7 +14,7 @@ from rest_framework.pagination import LimitOffsetPagination, PageNumberPaginatio
 def category_list(request):
     if request.method == 'GET':
         category = Category.objects.all()
-        serializer = CategorySerialzier(category, many=True)
+        serializer = CategorySerializer(category, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = CategorySerializer(data=request.data)

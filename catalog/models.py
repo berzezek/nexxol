@@ -10,7 +10,7 @@ import os
 
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     isActive = models.BooleanField(default=True)
 
 
