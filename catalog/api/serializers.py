@@ -11,26 +11,26 @@ class CategorySerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     class Meta:
-      model = Product
-      fields = (
-        'id',
-        'category',
-        'name',
-        'description',
-        'image_1',
-        'image_2',
-        'image_3',
-        'discount',
-        'unit',
-        'price',
-        'product_mark',
-        'isActive',
-        'created_at',
-        'discount_price',
-        'get_thumbnail'
-      )
+        model = Product
+        fields = (
+          'id',
+          'category',
+          'name',
+          'description',
+          'image_1',
+          'image_2',
+          'image_3',
+          'discount',
+          'unit',
+          'price',
+          'product_mark',
+          'isActive',
+          'created_at',
+          'discount_price',
+          'get_thumbnail'
+        )
 
 class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Product
-        fields: '__all__'
+        model = Product
+        fields = '__all__'
