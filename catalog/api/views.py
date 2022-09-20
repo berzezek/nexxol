@@ -1,5 +1,5 @@
 from catalog.models import Category, Product
-from .serializers import CategorySerializer, ProductSerializer
+from .serializers import CategorySerializer, ProductSerializer, ProductPostSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
@@ -55,7 +55,7 @@ def product_list(request):
         return Response(serializer.data)
 
     elif request.method ==  'POST':
-        serializer = ProductSerializer(data=request.data)
+        serializer = ProductPostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

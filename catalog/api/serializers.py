@@ -30,3 +30,7 @@ class ProductSerializer(serializers.ModelSerializer):
         'get_thumbnail'
       )
 
+class ProductPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model: Product
+        fields: '__all__'
