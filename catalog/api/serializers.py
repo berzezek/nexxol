@@ -9,7 +9,7 @@ class CategorySerializer(serializers.ModelSerializer):
         extra_kwargs = {'name': {'required': False}}
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
+    category = CategorySerializer(read_only=True)
     class Meta:
         model = Product
         fields = (
@@ -17,12 +17,10 @@ class ProductSerializer(serializers.ModelSerializer):
           'category',
           'name',
           'description',
-          'image_1',
-          'image_2',
-          'image_3',
+          'image',
           'discount',
-          'unit',
           'price',
+          'get_unit',
           'product_mark',
           'isActive',
           'created_at',
@@ -34,3 +32,8 @@ class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+        extra_kwargs = {
+            'category': {'required': False},
+            'name': {'required': False},
+            'price': {'required': False},
+            }
