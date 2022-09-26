@@ -15,19 +15,32 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    TAR_CHOICES = [
+        ('barrel', 'barrel'),
+        ('kanister', 'kanister'),
+        ('other', 'other'),
+    ]
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32)
     description = models.TextField(null=True, blank=True)
-    image_1 = models.ImageField(null=True, blank=True)
-    image_2 = models.ImageField(null=True, blank=True)
-    image_3 = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
     thumbnail = models.ImageField(upload_to='thumbnail/', blank=True, null=True)
+    tara = models.CharField(max_length=16, choices=TAR_CHOICES, default="other")
     discount = models.FloatField(default=0)
-    unit = models.CharField(max_length=32)
-    price = models.IntegerField()
+    unit = models.CharField(max_length=32, null=True, blank=True)
+    price = models.IntegerField(default=0, null=True, blank=True)
     product_mark = models.CharField(max_length=32, null=True, blank=True)
     isActive = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_unit(self):
+        if not self.unit:
+            if self.tara == 'barrel':
+                return '400 L'
+            elif self.tara == 'kanister':
+                return '20 L'
+        return self.unit
 
     def discount_price(self):
         if self.discount > 0:
@@ -49,15 +62,8 @@ class Product(models.Model):
 
 
     def make_thumbnail(self):
-        # img1 = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
-        # img2 = Image.open(settings.MEDIA_ROOT / "sample-out.png")
 
-        # img1.paste(img2, (146, 251))
-
-        # img1.save(settings.MEDIA_ROOT / f'{self.name}_default.png')
-
-        # img = Image.open(settings.MEDIA_ROOT / f'{self.name}_default.png')
-        img = Image.open(settings.MEDIA_ROOT / "picture_create/free_tar.png")
+        img = Image.open(f"{settings.MEDIA_ROOT}/picture_create/free_tar.png")
         draw = ImageDraw.Draw(img)
 
         fonts_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/fonts')
@@ -67,7 +73,7 @@ class Product(models.Model):
 
         text_name = f'{self.name}'
         text_mark = f'{self.product_mark}'
-        text_vol = f'{self.unit}'
+        text_vol = f'{self.get_unit()}'
         text_name_width = draw.textlength(text_name.upper(), font=font_name)
         text_mark_width = draw.textlength(text_mark.upper(), font=font_mark)
 
