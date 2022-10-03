@@ -47,10 +47,10 @@ class Product(models.Model):
             price = self.price - self.price * self.discount / 100
             return round(price, -3) - 100
 
-    def get_image_1(self):
-        if self.image_1:
-            return f'{self.image_1.url}' 
-        return null
+    def get_image(self):
+        if self.image:
+            return f'{self.image.url}'
+        return None
 
     def get_thumbnail(self):
         if self.thumbnail:

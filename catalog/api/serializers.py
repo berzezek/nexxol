@@ -31,9 +31,19 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
-        extra_kwargs = {
-            'category': {'required': False},
-            'name': {'required': False},
-            'price': {'required': False},
-            }
+        fields = (
+            'id',
+            'category',
+            'name',
+            'description',
+            'image',
+            'discount',
+            'price',
+            'get_unit',
+            'product_mark',
+            'isActive',
+            'created_at',
+            'discount_price',
+            'get_thumbnail'
+        )
+        extra_kwargs = {'category': {'required': False}, 'name': {'required': False}}

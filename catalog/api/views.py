@@ -8,9 +8,9 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
 
 
-@api_view(['GET', 'POST'])
+@api_view([ 'GET', 'POST' ])
 @csrf_exempt
-@permission_classes([IsAuthenticatedOrReadOnly])
+@permission_classes([ IsAuthenticatedOrReadOnly ])
 def category_list(request):
     if request.method == 'GET':
         category = Category.objects.all()
@@ -24,14 +24,14 @@ def category_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT', 'DELETE'])
+@api_view([ 'PUT', 'DELETE' ])
 @csrf_exempt
-@permission_classes([IsAuthenticatedOrReadOnly])
+@permission_classes([ IsAuthenticatedOrReadOnly ])
 def category_detail(request, id):
     try:
-    	category = Category.objects.get(id=id)
+        category = Category.objects.get(id=id)
     except Category.DoesNotExist:
-    	return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_404_NOT_FOUND)
     if request.method == 'PUT':
         serializer = CategorySerializer(category, data=request.data)
         print(category)
@@ -40,21 +40,21 @@ def category_detail(request, id):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'DELETE':   
+    elif request.method == 'DELETE':
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST'])
+@api_view([ 'GET', 'POST' ])
 @csrf_exempt
-@permission_classes([IsAuthenticatedOrReadOnly])
+@permission_classes([ IsAuthenticatedOrReadOnly ])
 def product_list(request):
     if request.method == 'GET':
         products = Product.objects.all().filter(category__isActive=True)
-        serializer = ProductSerializer(products, many=True)
+        serializer = ProductPostSerializer(products, many=True)
         return Response(serializer.data)
 
-    elif request.method ==  'POST':
+    elif request.method == 'POST':
         serializer = ProductPostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -62,9 +62,9 @@ def product_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT'])
+@api_view([ 'GET', 'PUT', 'DELETE' ])
 @csrf_exempt
-@permission_classes([IsAuthenticatedOrReadOnly])
+@permission_classes([ IsAuthenticatedOrReadOnly ])
 def product_detail(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
@@ -81,15 +81,8 @@ def product_detail(request, product_id):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-@csrf_exempt
-@permission_classes([IsAdminUser])
-def product_delete(request, product_id=None):
-    try:
-        product = Product.objects.get(id=product_id)
-    except Product.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == 'DELETE':   
+    elif request.method == 'DELETE':
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
