@@ -51,8 +51,15 @@ def category_detail(request, id):
 def product_list(request):
     if request.method == 'GET':
         products = Product.objects.all().filter(category__isActive=True)
-        serializer = ProductPostSerializer(products, many=True)
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        paginator.page_size = 100
+        products_count = products.count()
+        page_count = products.count()//paginator.page_size + 1
+        result_page = paginator.paginate_queryset(products, request)
+        serializer = ProductPostSerializer(result_page, many=True)
+        return Response({'result': serializer.data,
+                         'count': products_count,
+                         'page_count': page_count})
 
     elif request.method == 'POST':
         serializer = ProductPostSerializer(data=request.data)
