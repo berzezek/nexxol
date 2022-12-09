@@ -12,7 +12,14 @@ import os
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
     isActive = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='category/', blank=True, null=True, default='category/default.webp')
+    def get_image(self):
+        if self.image:
+            return f'{self.image.url}'
+        return None
 
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     TAR_CHOICES = [

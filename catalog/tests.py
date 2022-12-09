@@ -5,7 +5,7 @@ from rest_framework.test import APITestCase
 
 # Create your tests here.
 
-class TestGetToken(APITestCase):
+class TestAuthorization(APITestCase):
 
     token = None
 
@@ -36,7 +36,7 @@ class TestGetToken(APITestCase):
 
 
 
-class TestCategoryCreate(APITestCase):
+class TestCategory(APITestCase):
 
     def authenticated_client(self):
         self.client.post('/api/v1/auth/users/', data={
@@ -80,5 +80,21 @@ class TestCategoryCreate(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data[0]['name'], data['name'])
         self.assertEqual(response.data[0]['isActive'], data['isActive'])
+        data = {
+            'name': 'Product 1',
+            'price': 100,
+            'category': 1,
+            'isActive': True,
+        }
+        # product test
+        self.client.post('/api/v1/product/', data)
+        response = self.client.get('/api/v1/product/')
+        self.assertEqual(response.status_code, 200)
+        response = response.data['result'][0]
+        self.assertEqual(response['name'], data['name'])
+        self.assertEqual(response['price'], data['price'])
+        self.assertEqual(response['category']['id'], data['category'])
+        self.assertEqual(response['isActive'], True)
+
 
 

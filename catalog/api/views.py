@@ -50,8 +50,8 @@ def category_detail(request, id):
 @permission_classes([ IsAuthenticatedOrReadOnly ])
 def product_list(request):
     if request.method == 'GET':
-        products = Product.objects.all().filter(category__isActive=True)
-        paginator = PageNumberPagination()
+        products = Product.objects.filter(category__isActive=True)
+        paginator = LimitOffsetPagination()
         paginator.page_size = 100
         products_count = products.count()
         page_count = products.count()//paginator.page_size + 1
