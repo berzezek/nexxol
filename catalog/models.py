@@ -12,12 +12,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
     isActive = models.BooleanField(default=True)
-    image = models.ForeignKey('Image', on_delete=models.SET_NULL, null=True, blank=True)
-
-    def get_image(self):
-        if self.image:
-            return f'{self.image.url}'
-        return None
+    image = models.ImageField(upload_to='category/', blank=True, null=True, default='default.png')
 
     def __str__(self):
         return self.name
@@ -26,22 +21,10 @@ class Category(models.Model):
 class Brand(models.Model):
     name = models.CharField(max_length=255, unique=True)
     isActive = models.BooleanField(default=True)
-    image = models.ForeignKey('Image', on_delete=models.SET_NULL, null=True, blank=True)
+    image = models.ImageField(upload_to='brand/', blank=True, null=True, default='default.png')
 
     def __str__(self):
         return self.name
-
-
-class Image(models.Model):
-    image = models.ImageField(upload_to='catalog/', blank=True, null=True, default='default.png')
-
-    def get_image(self):
-        if self.image:
-            return f'{self.image.url}'
-        return None
-
-    def __str__(self):
-        return self.image.url
 
 
 class AbstractProduct(models.Model):
@@ -51,7 +34,7 @@ class AbstractProduct(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.DecimalField(max_digits=3, decimal_places=2, default=0)
     isActive = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='product/', blank=True, null=True, default='product/default.webp')
+    image = models.ImageField(upload_to='product/', blank=True, null=True, default='default.png')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
 
     def discount_price(self):
