@@ -1,4 +1,4 @@
-from catalog.models import Category, Product
+from catalog.models import Category, ProductLubricant as Product
 from .serializers import CategorySerializer, ProductSerializer, ProductPostSerializer
 from rest_framework.response import Response
 from rest_framework import status

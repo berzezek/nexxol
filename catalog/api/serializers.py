@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from catalog.models import Category, Product
+
+from catalog.models import Category, ProductLubricant
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -8,42 +9,40 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'name': {'required': False}}
 
+
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+
     class Meta:
-        model = Product
+        model = ProductLubricant
         fields = (
-          'id',
-          'category',
-          'name',
-          'description',
-          'image',
-          'discount',
-          'price',
-          'get_unit',
-          'product_mark',
-          'isActive',
-          'created_at',
-          'discount_price',
-          'get_thumbnail'
+            'id',
+            'name',
+            'brand',
+            'description',
+            'price',
+            'discount',
+            'isActive',
+            'image',
+            'category',
+            'volume',
+            'get_unit',
+            'get_thumbnail',
         )
+
 
 class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Product
+        model = ProductLubricant
         fields = (
             'id',
-            'category',
             'name',
+            'brand',
             'description',
-            'image',
-            'discount',
             'price',
-            'get_unit',
-            'product_mark',
+            'discount',
             'isActive',
-            'created_at',
-            'discount_price',
-            'get_thumbnail'
+            'category',
+
         )
         extra_kwargs = {'category': {'required': False}, 'name': {'required': False}}
