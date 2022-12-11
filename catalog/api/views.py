@@ -1,5 +1,5 @@
-from catalog.models import Category, ProductLubricant as Product
-from .serializers import CategorySerializer, ProductSerializer, ProductPostSerializer
+from catalog.models import Category, ProductLubricant as Product, Brand
+from .serializers import CategorySerializer, ProductSerializer, ProductPostSerializer, BrandSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
@@ -104,4 +104,13 @@ def product_post(request, product_id):
 
     if request.method == 'GET':
         serializer = ProductPostSerializer(product)
+        return Response(serializer.data)
+
+@api_view([ 'GET' ])
+@csrf_exempt
+@permission_classes([ IsAuthenticatedOrReadOnly ])
+def brand_list(request):
+    if request.method == 'GET':
+        brands = Brand.objects.all()
+        serializer = BrandSerializer(brands, many=True)
         return Response(serializer.data)

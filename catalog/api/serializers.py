@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from catalog.models import Category, ProductLubricant
+from catalog.models import Category, ProductLubricant as Product, Brand
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -9,15 +9,19 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
         extra_kwargs = {'name': {'required': False}}
 
-
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = '__all__'
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+    brand = BrandSerializer(read_only=True)
 
     class Meta:
-        model = ProductLubricant
+        model = Product
         fields = (
             'id',
-            'name',
+            'title',
             'brand',
             'description',
             'price',
@@ -28,15 +32,17 @@ class ProductSerializer(serializers.ModelSerializer):
             'volume',
             'get_unit',
             'get_thumbnail',
+            'thumbnail',
+            'created_at',
         )
 
 
 class ProductPostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ProductLubricant
+        model = Product
         fields = (
             'id',
-            'name',
+            'title',
             'brand',
             'description',
             'price',

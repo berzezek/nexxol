@@ -28,13 +28,14 @@ class Brand(models.Model):
 
 
 class AbstractProduct(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    discount = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+    discount = models.IntegerField(default=0)
     isActive = models.BooleanField(default=True)
     image = models.ImageField(upload_to='product/', blank=True, null=True, default='default.png')
+    created_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
 
     def discount_price(self):
@@ -52,7 +53,7 @@ class ProductLubricant(AbstractProduct):
 
     volume = models.CharField(max_length=255, blank=True, null=True, choices=VOLUME_CHOICES)
     unit = models.CharField(max_length=255, blank=True, null=True)
-    thumbnail = models.ImageField(upload_to='thumbnail/', blank=True, null=True, default='thumbnail/default.webp')
+    thumbnail = models.ImageField(upload_to='thumbnail/', blank=True, null=True)
 
     def get_unit(self):
         if not self.unit:
@@ -80,7 +81,7 @@ class ProductLubricant(AbstractProduct):
         font_name = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 16)
         font = ImageFont.truetype(os.path.join(fonts_path, 'Manrope-Bold.ttf'), 18)
 
-        text_name = f'{self.name}'
+        text_name = f'{self.title}'
         text_brand = f'{self.brand.name}'
         text_vol = f'{self.get_unit()}'
         text_name_width = draw.textlength(text_name.upper(), font=font_name)
@@ -92,9 +93,9 @@ class ProductLubricant(AbstractProduct):
 
         thumb_io = BytesIO()
         img.save(thumb_io, 'PNG', quality=100)
-        default_img = File(thumb_io, name=f'{self.name}_default.png')
+        default_img = File(thumb_io, name=f'{self.title}_default.png')
 
         return default_img
 
     def __str__(self):
-        return self.name
+        return self.title
